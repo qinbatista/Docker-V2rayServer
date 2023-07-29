@@ -18,7 +18,7 @@ RUN chmod +x v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
 RUN mv -f myconfig.json /etc/v2ray/config.json
-
+RUN v2ray -version
 # RUN set -ex \
 #     && apt-get install -y ca-certificates \
 #     && mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray \
