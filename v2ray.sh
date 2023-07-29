@@ -39,7 +39,7 @@ wget -O ${PWD}/v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/downl
 echo https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE}
 echo https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE}
 echo "${PWD}"
-echo "${ls}"
+echo "${ls /tmp}"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
 fi
