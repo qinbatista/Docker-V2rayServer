@@ -12,8 +12,8 @@ ARG TAG
 
 RUN mkdir -p /etc/v2ray /usr/local/share/v2ray
 RUN wget https://github.com/v2fly/v2ray-core/releases/download/v5.7.0/v2ray-linux-64.zip
-RUN wget https://github.com/v2fly/v2ray-core/releases/download/v5.7.0/v2ray-linux-64.zip.dgst
-RUN unzip v2ray.zip && chmod +x v2ray
+RUN unzip v2ray-linux-64.zip && chmod +x v2ray-linux-64
+RUN mv v2ray-linux-64 v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
 RUN mv config.json /etc/v2ray/config.json
