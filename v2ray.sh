@@ -34,7 +34,7 @@ V2RAY_FILE="v2ray-linux-${ARCH}.zip"
 DGST_FILE="v2ray-linux-${ARCH}.zip.dgst"
 echo "Downloading binary file: ${V2RAY_FILE}"
 echo "Downloading binary file: ${DGST_FILE}"
-
+echo "${PWD}"
 wget -O ${PWD}/v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
 wget -O ${PWD}/v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
 echo https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE}
@@ -44,7 +44,6 @@ if [ $? -ne 0 ]; then
 fi
 echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
-echo ls
 # Check SHA512
 V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
 V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
