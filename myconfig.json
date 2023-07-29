@@ -1,7 +1,7 @@
 {
     "log": {
-      "access": "/var/log/v2ray/access.log",
-      "error": "/var/log/v2ray/error.log",
+      "access": "/dev/stdout/access.log",
+      "error": "/dev/stdout/error.log",
       "loglevel": "warning"
     },
     "dns": {},

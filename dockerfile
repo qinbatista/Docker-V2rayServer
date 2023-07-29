@@ -16,7 +16,7 @@ RUN unzip v2ray-linux-64.zip && chmod +x v2ray-linux-64
 RUN mv v2ray-linux-64 v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
-RUN mv -f config.json /etc/v2ray/config.json
+RUN mv -f myconfig.json /etc/v2ray/config.json
 
 # RUN set -ex \
 #     && apt-get install -y ca-certificates \
