@@ -4,7 +4,6 @@ ADD * ./
 RUN apt-get update
 RUN apt-get -y install make gcc apt-utils
 
-WORKDIR /tmp
 ARG TARGETPLATFORM
 ARG TAG
 
