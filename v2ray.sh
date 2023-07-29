@@ -36,18 +36,15 @@ echo "Downloading binary file: ${V2RAY_FILE}"
 echo "Downloading binary file: ${DGST_FILE}"
 wget -O ${PWD}/v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
 wget -O ${PWD}/v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
-echo https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE}
-echo https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE}
-echo "${PWD}"
-echo "$(ls /tmp)"
+
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
 fi
 echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
-
+ls -al
 # Check SHA512
-V2RAY_ZIP_HASH=$(sha512sum /tmp/v2ray.zip | cut -f1 -d' ')
-V2RAY_ZIP_DGST_HASH=$(cat /tmp/v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
+V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
+V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
 
 if [ "${V2RAY_ZIP_HASH}" = "${V2RAY_ZIP_DGST_HASH}" ]; then
     echo " Check passed" && rm -fv v2ray.zip.dgst
@@ -59,10 +56,10 @@ fi
 
 # Prepare
 echo "Prepare to use"
-unzip /tmp/v2ray.zip && chmod +x v2ray
-mv /tmp/v2ray /usr/bin/
-mv /tmp/geosite.dat /tmp/geoip.dat /usr/local/share/v2ray/
-mv /tmp/config.json /etc/v2ray/config.json
+unzip v2ray.zip && chmod +x v2ray
+mv v2ray /usr/bin/
+mv geosite.dat geoip.dat /usr/local/share/v2ray/
+mv config.json /etc/v2ray/config.json
 
 # Clean
 rm -rf ${PWD}/*
