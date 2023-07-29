@@ -7,6 +7,10 @@ RUN apt-get -y install make gcc apt-utils
 WORKDIR /tmp
 ARG TARGETPLATFORM
 ARG TAG
+
+RUN echo "TARGETPLATFORM: $TARGETPLATFORM"
+RUN echo "TAG: $TAG"
+
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
 
 RUN set -ex \
