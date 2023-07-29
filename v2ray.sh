@@ -44,6 +44,7 @@ if [ $? -ne 0 ]; then
 fi
 echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
+echo ls
 # Check SHA512
 V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
 V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
