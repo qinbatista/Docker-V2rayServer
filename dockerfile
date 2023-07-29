@@ -16,7 +16,7 @@ RUN unzip v2ray-linux-64.zip && chmod +x v2ray-linux-64
 RUN mv v2ray-linux-64 v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
-RUN mv config.json /etc/v2ray/config.json
+RUN mv -f config.json /etc/v2ray/config.json
 
 # RUN set -ex \
 #     && apt-get install -y ca-certificates \
@@ -26,8 +26,6 @@ RUN mv config.json /etc/v2ray/config.json
 #     && ln -sf /dev/stderr /var/log/v2ray/error.log \
 #     && chmod +x "${WORKDIR}"/v2ray.sh \
 #     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
-
-RUN cp /config.json /etc/v2ray/config.json
 
 EXPOSE 8000-8000/tcp
 CMD  ["python","/usr/local/ssr/shadowsocks/server.py", "-c", "/etc/ssr.json"]
