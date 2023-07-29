@@ -29,4 +29,4 @@ RUN mv -f myconfig.json /etc/v2ray/config.json
 #     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
 EXPOSE 8000-8000/tcp
-CMD  ["v2ray","-c","/etc/v2fly/config.json"]
+CMD  ["v2ray","-config","/etc/v2fly/config.json"]
