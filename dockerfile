@@ -13,6 +13,7 @@ RUN echo "TAG: $TAG"
 
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
 
+
 RUN set -ex \
     && apt-get install -y ca-certificates \
     && mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray \
