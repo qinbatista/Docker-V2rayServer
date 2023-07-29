@@ -29,4 +29,4 @@ RUN mv -f myconfig.json /etc/v2ray/config.json
 #     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
 EXPOSE 8000-8000/tcp
-CMD  ["python","/usr/local/ssr/shadowsocks/server.py", "-c", "/etc/ssr.json"]
+CMD  ["v2fly/v2fly-core","/etc/v2fly/config.json"]
