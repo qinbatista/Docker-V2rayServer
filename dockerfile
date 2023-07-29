@@ -23,7 +23,6 @@ RUN set -ex \
     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
 
-
 RUN cp config.json /etc/v2ray/config.json
 EXPOSE 8000-8000/tcp
 CMD  ["python","/usr/local/ssr/shadowsocks/server.py", "-c", "/etc/ssr.json"]
