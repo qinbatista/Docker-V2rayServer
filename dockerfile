@@ -2,7 +2,7 @@ FROM debian:10-slim
 ADD * ./
 
 RUN apt-get update
-RUN apt-get -y install make gcc
+RUN apt-get -y install make gcc apt-utils
 
 WORKDIR /tmp
 ARG TARGETPLATFORM
