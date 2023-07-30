@@ -18,8 +18,8 @@ RUN chmod +x v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
 RUN mv -f myconfig.json /etc/v2ray/config.json
-RUN v2ray --version
-RUN v2ray --config
+RUN v2ray v
+
 # RUN set -ex \
 #     && apt-get install -y ca-certificates \
 #     && mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray \
@@ -30,4 +30,4 @@ RUN v2ray --config
 #     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
 EXPOSE 8000-8000/tcp
-CMD  ["v2ray","--config","/etc/v2fly/config.json"]
+CMD  ["v2ray","c","/etc/v2fly/config.json"]
