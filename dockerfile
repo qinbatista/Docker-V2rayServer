@@ -1,6 +1,6 @@
 FROM alpine:latest
 ADD * ./
-
+RUN ls
 WORKDIR /tmp
 ARG TARGETPLATFORM
 ARG TAG
