@@ -1,6 +1,7 @@
 FROM alpine:latest
 ADD * ./
 RUN ls
+RUN pwd
 WORKDIR /tmp
 ARG TARGETPLATFORM
 ARG TAG
@@ -15,7 +16,7 @@ RUN set -ex \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 RUN ls
-RUN mv -f config.json /etc/v2ray/config.json
+RUN mv -f /config.json /etc/v2ray/config.json
 
 EXPOSE 8000-8000/tcp
 CMD  ["v2ray","run","-c","/etc/v2ray/config.json"]
