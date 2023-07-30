@@ -1,9 +1,4 @@
 {
-    "log": {
-      "access": "/dev/stdout/access.log",
-      "error": "/dev/stdout/error.log",
-      "loglevel": "warning"
-    },
     "dns": {},
     "stats": {},
     "inbounds": [
