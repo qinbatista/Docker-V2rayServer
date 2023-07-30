@@ -12,11 +12,11 @@ RUN ls
 RUN chmod +x v2ray
 RUN mv v2ray /usr/bin/
 RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
-RUN mv -f myconfig.json /etc/v2fly/config.json
+RUN mv -f myconfig.json /etc/v2ray/config.json
 RUN v2ray help
 RUN v2ray version
 RUN v2ray help run
-RUN v2ray run -c /etc/v2fly/config.json
+RUN v2ray run -c /etc/v2ray/config.json
 
 # RUN set -ex \
 #     && apt-get install -y ca-certificates \
@@ -28,4 +28,4 @@ RUN v2ray run -c /etc/v2fly/config.json
 #     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
 EXPOSE 8000-8000/tcp
-CMD  ["v2ray","c","/etc/v2fly/config.json"]
+CMD  ["v2ray","c","/etc/v2ray/config.json"]
