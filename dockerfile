@@ -20,6 +20,7 @@ RUN mv geosite.dat geoip.dat /usr/local/share/v2ray/
 RUN mv -f myconfig.json /etc/v2ray/config.json
 RUN v2ray help
 RUN v2ray version
+RUN v2ray help run
 RUN v2ray help run -c /etc/v2fly/config.json
 
 # RUN set -ex \
