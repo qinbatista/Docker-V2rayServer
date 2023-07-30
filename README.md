@@ -1,17 +1,12 @@
 ## Build Command
 
 ```
-docker build -t qinbatista/ssrserver .
+docker build -t qinbatista/v2rayserver .
 ```
 
 ## Run Command
 ```
-docker run -itd  --restart=always -p 7000-7030:7000-7030  qinbatista/ssrserver
+docker run -itd  --restart=always -p 8000:8000  qinbatista/v2rayserver
 ```
-## ssr.json
-```
-modify password and port in this file
-```
-
 
 # Docker-V2rayServer
