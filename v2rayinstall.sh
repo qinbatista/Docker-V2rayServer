@@ -41,11 +41,11 @@ case $sys_bit in
 	caddy_arch="arm64"
 	;;
 *)
-	echo -e "
-	哈哈……这个 ${red}辣鸡脚本${none} 不支持你的系统。 ${yellow}(-_-) ${none}
+	# echo -e "
+	# 哈哈……这个 ${red}辣鸡脚本${none} 不支持你的系统。 ${yellow}(-_-) ${none}
 
-	备注: 仅支持 Ubuntu 16+ / Debian 8+ / CentOS 7+ 系统
-	" && exit 1
+	# 备注: 仅支持 Ubuntu 16+ / Debian 8+ / CentOS 7+ 系统
+	# " && exit 1
 	;;
 esac
 
