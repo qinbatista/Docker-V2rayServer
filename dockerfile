@@ -19,4 +19,5 @@ RUN ls
 RUN mv -f /config.json /etc/v2ray/config.json
 
 EXPOSE 8000/tcp
+EXPOSE 8000/udp
 CMD  ["v2ray","run","-c","/etc/v2ray/config.json"]
