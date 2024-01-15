@@ -6,10 +6,17 @@ ADD * ./
 WORKDIR /tmp
 
 #all variables are on github action
+ARG V2RAY_CADDY_CONFIG
 ARG V2RAY_CADDYFILE
 ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
+
+#download caddy files
+RUN apk add wget
+RUN wget ${V2RAY_CADDYFILE}
+RUN wget ${V2RAY_CADDY_CONFIG}
+
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
@@ -21,11 +28,9 @@ RUN set -ex \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
-RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
+RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
 
-#install caddy file
-RUN apk add wget
-RUN wget ${V2RAY_CADDYFILE}
+
 
 #install caddy
 RUN apk add caddy
