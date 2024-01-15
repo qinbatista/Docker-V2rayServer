@@ -32,13 +32,7 @@ RUN apk add wget
 RUN wget ${V2RAY_CADDYFILE}
 RUN wget ${V2RAY_CADDY_CONFIG}
 
-RUN pwd
-RUN ls /
-RUN ls /tmp
-RUN ls ./
-
 RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
-
 
 #install caddy
 RUN apk add caddy
