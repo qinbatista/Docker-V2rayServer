@@ -25,7 +25,7 @@ RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
 
 #install caddy file
 RUN apk add wget
-RUN wget V2RAY_CADDYFILE
+RUN wget ${V2RAY_CADDYFILE}
 
 #install caddy
 RUN apk add caddy
