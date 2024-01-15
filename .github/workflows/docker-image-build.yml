@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -t qinbatista/v2rayserver .  /
-                --build-arg V2RAY_CADDY_CONFIG="${{ vars.V2RAY_CADDY_CONFIG }}" /
-                --build-arg V2RAY_CADDYFILE="${{ vars.V2RAY_CADDYFILE }}" /
-                --build-arg V2RAY_DOWNLOADURL="${{ vars.V2RAY_DOWNLOADURL }}" /
-                --build-arg V2RAY_TARGETPLATFORM="${{ vars.V2RAY_TARGETPLATFORM }}" /
+        run: docker build -t qinbatista/v2rayserver .
+                --build-arg V2RAY_CADDY_CONFIG="${{ vars.V2RAY_CADDY_CONFIG }}"
+                --build-arg V2RAY_CADDYFILE="${{ vars.V2RAY_CADDYFILE }}"
+                --build-arg V2RAY_DOWNLOADURL="${{ vars.V2RAY_DOWNLOADURL }}"
+                --build-arg V2RAY_TARGETPLATFORM="${{ vars.V2RAY_TARGETPLATFORM }}"
                 --build-arg V2RAY_TAG="${{ vars.V2RAY_TAG }}"
 
       - name: Login to Docker Hub
