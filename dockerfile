@@ -30,7 +30,7 @@ RUN set -ex \
     && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
 RUN pwd
 RUN ls -al
-RUN mv -f "${WORKDIR}"/v2rayconfig.json /etc/v2ray/config.json
+RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
 
 
 #install caddy
