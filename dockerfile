@@ -29,7 +29,7 @@ RUN wget ${V2RAY_CADDYFILE}
 
 #install caddy
 RUN apk add caddy
-RUN mv -f "${WORKDIR}"/Caddyfile /etc/caddy/Caddyfile
+RUN mv -f ./Caddyfile /etc/caddy/Caddyfile
 
 #remove all folder
 RUN rm -rf /tmp
