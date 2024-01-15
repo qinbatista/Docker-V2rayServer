@@ -6,10 +6,10 @@ ADD * ./
 WORKDIR /tmp
 
 #all variables are on github action
+ARG V2RAY_CADDYFILE
 ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
-ARG V2RAY_CADDYFILE
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
