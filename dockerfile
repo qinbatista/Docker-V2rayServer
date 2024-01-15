@@ -27,11 +27,9 @@ RUN set -ex \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
 
-
 RUN apk add wget
 RUN wget ${V2RAY_CADDYFILE}
 RUN wget ${V2RAY_CADDY_CONFIG}
-
 RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
 
 #install caddy
