@@ -1,6 +1,5 @@
 FROM python:3.8.13-alpine3.16 as python
-RUN pwd
-RUN ls
+
 ADD * ./
 #[Start] V2ray--------------------------------------------------
 RUN pip install -r requirements.txt
@@ -15,7 +14,6 @@ ENV V2RAY_ADDRESS=${V2RAY_ADDRESS}
 RUN apk add wget
 RUN wget ${V2RAY_DOWNLOADURL}/${V2RAY_ADDRESS}/v2rayconfig.json
 RUN cat /tmp/v2rayconfig.json
-
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
 RUN set -ex \
@@ -25,14 +23,11 @@ RUN set -ex \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
-
 #install caddy
 RUN apk add caddy
 RUN wget ${V2RAY_DOWNLOADURL}/${V2RAY_ADDRESS}/Caddyfile
 RUN cat /tmp/Caddyfile
 RUN mv -f /tmp/Caddyfile /etc/caddy/Caddyfile
-
-
 #remove all folder
 RUN rm -rf /tmp
 #[End] V2ray-----------------------------------------------------
