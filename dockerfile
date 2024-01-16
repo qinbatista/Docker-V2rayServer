@@ -18,7 +18,7 @@ RUN apk add wget
 RUN wget ${V2RAY_CONFIG}
 RUN ls
 RUN pwd
-RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
+RUN mv -f /tmp/v2rayconfig.json /etc/v2ray/config.json
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
@@ -34,7 +34,7 @@ RUN set -ex \
 #install caddy
 RUN apk add caddy
 RUN wget ${V2RAY_CADDYFILE}
-RUN mv -f ./Caddyfile /etc/caddy/Caddyfile
+RUN mv -f /tmp/Caddyfile /etc/caddy/Caddyfile
 
 #remove all folder
 RUN rm -rf /tmp
