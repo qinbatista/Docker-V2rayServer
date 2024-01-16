@@ -4,7 +4,6 @@ ADD * ./
 
 #[Start] V2ray--------------------------------------------------
 WORKDIR /tmp
-
 #all variables are on github action
 ARG V2RAY_ADDRESS
 ARG V2RAY_DOWNLOADURL
