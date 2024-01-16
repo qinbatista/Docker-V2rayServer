@@ -20,7 +20,6 @@ RUN ls
 RUN pwd
 RUN cat /tmp/v2rayconfig.json
 
-
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
 RUN set -ex \
