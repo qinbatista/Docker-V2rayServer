@@ -6,7 +6,7 @@ ADD * ./
 WORKDIR /tmp
 
 #all variables are on github action
-ARG V2RAY_CADDY_CONFIG
+ARG V2RAY_CONFIG
 ARG V2RAY_CADDYFILE
 ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
@@ -14,7 +14,8 @@ ARG V2RAY_TAG
 
 #install v2ray config
 RUN apk add wget
-RUN wget ${V2RAY_CADDYFILE}
+RUN wget ${V2RAY_CONFIG}
+RUN ls
 RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
 
 #install v2ray
@@ -30,7 +31,7 @@ RUN set -ex \
 
 #install caddy
 RUN apk add caddy
-RUN wget ${V2RAY_CADDY_CONFIG}
+RUN wget ${V2RAY_CADDYFILE}
 RUN mv -f ./Caddyfile /etc/caddy/Caddyfile
 
 #remove all folder
