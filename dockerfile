@@ -12,13 +12,10 @@ ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
 
+#install v2ray config
 RUN apk add wget
 RUN wget ${V2RAY_CADDYFILE}
-RUN wget ${V2RAY_CADDY_CONFIG}
-
-
-RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
-
+RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
@@ -33,6 +30,7 @@ RUN set -ex \
 
 #install caddy
 RUN apk add caddy
+RUN wget ${V2RAY_CADDY_CONFIG}
 RUN mv -f ./Caddyfile /etc/caddy/Caddyfile
 
 #remove all folder
