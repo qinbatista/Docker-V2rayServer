@@ -44,8 +44,8 @@ RUN apk add supervisor
 # Create supervisord.conf
 RUN echo "[supervisord]" > /etc/supervisord.conf \
     && echo "nodaemon=true" >> /etc/supervisord.conf \
-    # && echo "[program:caddy]" >> /etc/supervisord.conf \
-    # && echo "command=caddy run --config /etc/caddy/Caddyfile" >> /etc/supervisord.conf \
+    && echo "[program:caddy]" >> /etc/supervisord.conf \
+    && echo "command=caddy run --config /etc/caddy/Caddyfile" >> /etc/supervisord.conf \
     && echo "[program:v2ray]" >> /etc/supervisord.conf \
     && echo "command=v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
 
