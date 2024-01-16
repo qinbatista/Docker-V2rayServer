@@ -1,6 +1,8 @@
 FROM python:3.8.13-alpine3.16 as python
+RUN pwd
+RUN ls
 ADD * ./
-
+RUN pip install -r requirements.txt
 #[Start] V2ray--------------------------------------------------
 WORKDIR /tmp
 #all variables are on github action
@@ -29,7 +31,7 @@ RUN apk add caddy
 RUN wget ${V2RAY_DOWNLOADURL}/${V2RAY_ADDRESS}/Caddyfile
 RUN cat /tmp/Caddyfile
 RUN mv -f /tmp/Caddyfile /etc/caddy/Caddyfile
-RUN pip install -r /tmp/requirements.txt
+
 
 #remove all folder
 RUN rm -rf /tmp
