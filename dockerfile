@@ -12,6 +12,7 @@ ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
 
+
 #install v2ray config
 RUN apk add wget
 RUN wget ${V2RAY_CONFIG}
