@@ -16,7 +16,6 @@ class CaddyLauncher:
         p = subprocess.Popen("caddy run --config /etc/caddy/Caddyfile", universal_newlines=True, shell=True,)
         p.wait()
 
-
 if __name__ == "__main__":
     sf = CaddyLauncher()
     sf._Caddy()
