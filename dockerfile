@@ -36,7 +36,6 @@ RUN mv -f ./Caddyfile /etc/caddy/Caddyfile
 RUN rm -rf /tmp
 #[End] V2ray-----------------------------------------------------
 
-
 # Install supervisord
 RUN apk add supervisor
 
