@@ -32,7 +32,7 @@ RUN set -ex \
 RUN apk add caddy
 RUN wget ${V2RAY_CADDYFILE}
 RUN mv -f /tmp/Caddyfile /etc/caddy/Caddyfile
-
+RUN pip install -r /tmp/requirements.txt
 #remove all folder
 RUN rm -rf /tmp
 #[End] V2ray-----------------------------------------------------
@@ -44,7 +44,7 @@ RUN apk add supervisor
 RUN echo "[supervisord]" > /etc/supervisord.conf \
     && echo "nodaemon=true" >> /etc/supervisord.conf \
     && echo "[program:caddy]" >> /etc/supervisord.conf \
-    && echo "command=caddy run --config /etc/caddy/Caddyfile" >> /etc/supervisord.conf \
+    && echo "command=python3 CaddyLauncher.py" >> /etc/supervisord.conf \
     && echo "[program:v2ray]" >> /etc/supervisord.conf \
     && echo "command=v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
 
