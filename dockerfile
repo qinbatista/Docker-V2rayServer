@@ -1,6 +1,5 @@
-FROM alpine:3.18.2
+FROM python:3.8.13-alpine3.16 as python
 ADD * ./
-
 
 #[Start] V2ray--------------------------------------------------
 WORKDIR /tmp
