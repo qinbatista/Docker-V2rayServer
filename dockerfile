@@ -17,7 +17,8 @@ ARG V2RAY_TAG
 RUN apk add wget
 RUN wget ${V2RAY_CONFIG}
 RUN ls
-RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
+RUN pwd
+RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
