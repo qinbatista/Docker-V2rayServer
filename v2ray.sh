@@ -3,6 +3,8 @@
 # Set ARG
 PLATFORM=$1
 TAG=$2
+V2RAY_DOWNLOADURL = $3
+
 if [ -z "$PLATFORM" ]; then
     ARCH="64"
 else
@@ -35,8 +37,8 @@ DGST_FILE="v2ray-linux-${ARCH}.zip.dgst"
 echo "Downloading binary file: ${V2RAY_FILE}"
 echo "Downloading binary file: ${DGST_FILE}"
 
-wget -O ${PWD}/v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
-wget -O ${PWD}/v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
+wget -O ${PWD}/v2ray.zip ${V2RAY_DOWNLOADURL}/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
+wget -O ${PWD}/v2ray.zip.dgst ${V2RAY_DOWNLOADURL}/${TAG}/${DGST_FILE} > /dev/null 2>&1
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
@@ -60,7 +62,7 @@ echo "Prepare to use"
 unzip v2ray.zip && chmod +x v2ray
 mv v2ray /usr/bin/
 mv geosite.dat geoip.dat /usr/local/share/v2ray/
-mv config.json /etc/v2ray/config.json
+mv /tmp/v2rayconfig.json /etc/v2ray/config.json
 
 # Clean
 rm -rf ${PWD}/*
