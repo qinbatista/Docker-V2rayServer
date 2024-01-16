@@ -1,22 +1,9 @@
 FROM alpine:3.18.2
 ADD * ./
 
-
-#[Start] V2ray--------------------------------------------------
 WORKDIR /tmp
-
-#all variables are on github action
-ARG V2RAY_CONFIG
-ARG V2RAY_CADDYFILE
-ARG V2RAY_DOWNLOADURL
-ARG V2RAY_TARGETPLATFORM
-ARG V2RAY_TAG
-
-
-#install v2ray config
-RUN apk add wget
-RUN wget ${V2RAY_CONFIG}
-RUN cat /tmp/v2rayconfig.json
+ARG TARGETPLATFORM
+ARG TAG
 
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
@@ -27,16 +14,12 @@ RUN set -ex \
     && ln -sf /dev/stdout /var/log/v2ray/access.log \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "${WORKDIR}"/v2ray.sh \
-    && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
+    && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
+RUN mv -f /v2rayconfig.json /etc/v2ray/config.json
 
 #install caddy
 RUN apk add caddy
-RUN wget ${V2RAY_CADDYFILE}
-RUN mv -f /tmp/Caddyfile /etc/caddy/Caddyfile
-
-#remove all folder
-RUN rm -rf /tmp
-#[End] V2ray-----------------------------------------------------
+RUN mv -f /Caddyfile /etc/caddy/Caddyfile
 
 # Install supervisord
 RUN apk add supervisor
