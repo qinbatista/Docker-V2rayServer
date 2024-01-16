@@ -1,8 +1,4 @@
-## Build Command
-
-```
-docker build -t qinbatista/v2rayserver .
-```
+# Docker-V2rayServer
 
 ## Run Command
 ```
@@ -10,4 +6,3 @@ docker pull qinbatista/v2rayserver && docker run -itd --restart=always -p 443:44
 ```
 
 
-# Docker-V2rayServer

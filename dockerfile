@@ -2,15 +2,15 @@ FROM python:3.8.13-alpine3.16 as python
 RUN pwd
 RUN ls
 ADD * ./
-RUN pip install -r requirements.txt
 #[Start] V2ray--------------------------------------------------
+RUN pip install -r requirements.txt
 WORKDIR /tmp
 #all variables are on github action
 ARG V2RAY_ADDRESS
 ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
-
+ENV V2RAY_ADDRESS=${V2RAY_ADDRESS}
 #install v2ray config
 RUN apk add wget
 RUN wget ${V2RAY_DOWNLOADURL}/${V2RAY_ADDRESS}/v2rayconfig.json
