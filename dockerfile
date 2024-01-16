@@ -12,6 +12,14 @@ ARG V2RAY_DOWNLOADURL
 ARG V2RAY_TARGETPLATFORM
 ARG V2RAY_TAG
 
+RUN apk add wget
+RUN wget ${V2RAY_CADDYFILE}
+RUN wget ${V2RAY_CADDY_CONFIG}
+
+
+RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
+
+
 #install v2ray
 COPY v2ray.sh "${WORKDIR}"/v2ray.sh
 RUN set -ex \
@@ -22,11 +30,6 @@ RUN set -ex \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${V2RAY_TARGETPLATFORM}" "${V2RAY_TAG}" "${V2RAY_DOWNLOADURL}"
-
-RUN apk add wget
-RUN wget ${V2RAY_CADDYFILE}
-RUN wget ${V2RAY_CADDY_CONFIG}
-RUN mv -f ./v2rayconfig.json /etc/v2ray/config.json
 
 #install caddy
 RUN apk add caddy
