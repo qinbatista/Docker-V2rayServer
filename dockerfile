@@ -16,8 +16,6 @@ ARG V2RAY_TAG
 #install v2ray config
 RUN apk add wget
 RUN wget ${V2RAY_CONFIG}
-RUN ls
-RUN pwd
 RUN cat /tmp/v2rayconfig.json
 
 #install v2ray
