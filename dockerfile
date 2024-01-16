@@ -18,6 +18,7 @@ RUN apk add wget
 RUN wget ${V2RAY_CONFIG}
 RUN ls
 RUN pwd
+RUN cat /tmp/v2rayconfig.json
 RUN mv -f /tmp/v2rayconfig.json /etc/v2ray/config.json
 
 #install v2ray
