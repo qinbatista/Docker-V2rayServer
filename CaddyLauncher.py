@@ -15,23 +15,18 @@ class CaddyLauncher:
         while True:
             try:
                 time.sleep(10)
-                self.__log(requests.get(
-                    "https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
+                self.__log(requests.get("https://checkip.amazonaws.com").text.strip() + " " + gethostbyname(v2ray_address))
+
                 if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
-                    self.__log("start caddyL:30s")
-                    time.sleep(30)
-                    self.__log("start caddy")
-                    process = subprocess.Popen(
-                        "caddy run --config /etc/caddy/Caddyfile",
+                    self.__log("Starting Caddy...")
+                    subprocess.Popen(
+                        "nohup caddy run --config /etc/caddy/Caddyfile &",
                         shell=True,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE,
                         universal_newlines=True
                     )
-                    stdout, stderr = process.communicate()
-                    result = stdout + stderr
-                    process.wait()
-                    self.__log(result)
+                    self.__log("Caddy started in background.")
                     break
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
