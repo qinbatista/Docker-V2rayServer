@@ -13,23 +13,26 @@ class CaddyLauncher:
     def _Caddy(self):
         v2ray_address = os.environ.get('V2RAY_ADDRESS')
         while True:
-            time.sleep(10)
-            self.__log(requests.get(
-                "https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
-            if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
-                break
-            time.sleep(10)
-            process = subprocess.Popen(
-                "caddy run --config /etc/caddy/Caddyfile",
-                shell=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                universal_newlines=True
-            )
-            stdout, stderr = process.communicate()
-            result = stdout + stderr
-            self.__log(result)
-            process.wait()
+            try:
+                time.sleep(10)
+                self.__log(requests.get(
+                    "https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
+                if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
+                    break
+                time.sleep(10)
+                process = subprocess.Popen(
+                    "caddy run --config /etc/caddy/Caddyfile",
+                    shell=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    universal_newlines=True
+                )
+                stdout, stderr = process.communicate()
+                result = stdout + stderr
+                self.__log(result)
+                process.wait()
+            except Exception as e:
+                self.__log(f"An error occurred: {str(e)}")
 
     def __log(self, result):
         with open(self.__file_path, "a+") as f:
