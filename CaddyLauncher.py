@@ -19,14 +19,15 @@ class CaddyLauncher:
 
                 if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
                     self.__log("Starting Caddy...")
-                    subprocess.Popen(
-                        "nohup caddy run --config /etc/caddy/Caddyfile &",
-                        shell=True,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        universal_newlines=True
-                    )
-                    self.__log("Caddy started in background.")
+                    with open(self.__file_path, "a+") as output_file:
+                        subprocess.Popen(
+                            "nohup caddy run --config /etc/caddy/Caddyfile &",
+                            shell=True,
+                            stdout=output_file,
+                            stderr=output_file,
+                            universal_newlines=True
+                        )
+                    self.__log(f"Caddy started in background. Logging to {self.__file_path}.")
                     break
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
