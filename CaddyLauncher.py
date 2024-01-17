@@ -18,19 +18,19 @@ class CaddyLauncher:
                 self.__log(requests.get(
                     "https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
                 if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
+                    time.sleep(30)
+                    process = subprocess.Popen(
+                        "caddy run --config /etc/caddy/Caddyfile",
+                        shell=True,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        universal_newlines=True
+                    )
+                    stdout, stderr = process.communicate()
+                    result = stdout + stderr
+                    self.__log(result)
+                    process.wait()
                     break
-                time.sleep(10)
-                process = subprocess.Popen(
-                    "caddy run --config /etc/caddy/Caddyfile",
-                    shell=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    universal_newlines=True
-                )
-                stdout, stderr = process.communicate()
-                result = stdout + stderr
-                self.__log(result)
-                process.wait()
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
 
