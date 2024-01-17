@@ -15,6 +15,7 @@ class CaddyLauncher:
             self.__log(requests.get("https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
             if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
                 break
+            time.sleep(10)
         p = subprocess.Popen("caddy run --config /etc/caddy/Caddyfile", universal_newlines=True, shell=True,)
         p.wait()
 
