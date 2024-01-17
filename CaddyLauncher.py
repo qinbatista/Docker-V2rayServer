@@ -18,7 +18,9 @@ class CaddyLauncher:
                 self.__log(requests.get(
                     "https://checkip.amazonaws.com").text.strip()+" " + gethostbyname(v2ray_address))
                 if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
+                    self.__log("start caddyL:30s")
                     time.sleep(30)
+                    self.__log("start caddy")
                     process = subprocess.Popen(
                         "caddy run --config /etc/caddy/Caddyfile",
                         shell=True,
@@ -28,8 +30,8 @@ class CaddyLauncher:
                     )
                     stdout, stderr = process.communicate()
                     result = stdout + stderr
-                    self.__log(result)
                     process.wait()
+                    self.__log(result)
                     break
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
