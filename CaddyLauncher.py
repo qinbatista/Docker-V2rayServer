@@ -4,8 +4,6 @@ import subprocess
 import requests
 import time
 from socket import *
-
-
 class CaddyLauncher:
     def __init__(self):
         self.__file_path = "/v2ray_server.txt"
