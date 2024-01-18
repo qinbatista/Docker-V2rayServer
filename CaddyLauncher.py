@@ -29,14 +29,12 @@ class CaddyLauncher:
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
 
-
     def __log(self, result):
         with open(self.__file_path, "a+") as f:
             f.write(result+"\n")
         if os.path.getsize(self.__file_path) > 1024*128:
             with open(self.__file_path, "r") as f:
                 os.remove(self.__file_path)
-
 
 if __name__ == "__main__":
     sf = CaddyLauncher()
