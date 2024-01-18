@@ -37,7 +37,6 @@ class CaddyLauncher:
             f.write(result+"\n")
         if os.path.getsize(self.__file_path) > 1024*128:
             with open(self.__file_path, "r") as f:
-                content = f.readlines()
                 os.remove(self.__file_path)
 
 
