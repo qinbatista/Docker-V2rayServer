@@ -15,7 +15,7 @@ class CaddyLauncher:
         while True:
             try:
                 time.sleep(10)
-                self.__log(requests.get("https://checkip.amazonaws.com").text.strip() + " " + gethostbyname(v2ray_address))
+                self.__log("this address:"+requests.get("https://checkip.amazonaws.com").text.strip() + " config address:" + gethostbyname(v2ray_address))
 
                 if requests.get("https://checkip.amazonaws.com").text.strip() == gethostbyname(v2ray_address):
                     self.__log("Starting Caddy...")
