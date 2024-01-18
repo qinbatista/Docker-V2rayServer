@@ -36,7 +36,6 @@ class CaddyLauncher:
             with open(self.__file_path, "r") as f:
                 os.remove(self.__file_path)
 
-
 if __name__ == "__main__":
     sf = CaddyLauncher()
     sf._Caddy()
