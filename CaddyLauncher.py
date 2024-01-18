@@ -29,6 +29,7 @@ class CaddyLauncher:
             except Exception as e:
                 self.__log(f"An error occurred: {str(e)}")
 
+
     def __log(self, result):
         with open(self.__file_path, "a+") as f:
             f.write(result+"\n")
