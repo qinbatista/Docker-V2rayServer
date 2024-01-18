@@ -45,5 +45,5 @@ RUN echo "[supervisord]" > /etc/supervisord.conf \
     && echo "command=v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
 
 
-EXPOSE 443/tcp 7000/tcp
+EXPOSE 443/tcp 7000/tcp 7000/udp
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
