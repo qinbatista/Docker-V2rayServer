@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -t qinbatista/v2rayserver .
+        run: docker build -t qinbatista/v2rayservertest .
                 --build-arg V2RAY_ADDRESS="${{ vars.V2RAY_ADDRESS }}"
                 --build-arg V2RAY_DOWNLOADURL="${{ vars.V2RAY_DOWNLOADURL }}"
                 --build-arg V2RAY_TAG="${{ vars.V2RAY_TAG }}"
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -t qinbatista/v2rayserver .
+        run: docker build -t qinbatista/v2rayservertimov4 .
                 --build-arg V2RAY_ADDRESS="${{ vars.V2RAY_ADDRESS }}"
                 --build-arg V2RAY_DOWNLOADURL="${{ vars.V2RAY_DOWNLOADURL }}"
                 --build-arg V2RAY_TAG="${{ vars.V2RAY_TAG }}"
