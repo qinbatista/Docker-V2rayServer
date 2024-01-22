@@ -7,7 +7,7 @@ on:
     branches: ["master"]
 
 jobs:
-  us:
+  test:
     runs-on: ubuntu-latest
     environment: BuildEnv
     steps:
