@@ -15,14 +15,17 @@ WORKDIR /tmp
 RUN wget -O /tmp/v2rayconfig.json ${V2RAY_CONFIG_URL}
 RUN cat /tmp/v2rayconfig.json
 # Install v2ray core
-COPY v2ray.sh "/tmp/v2ray.sh"
 RUN set -ex \
     && mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray \
     && ln -sf /dev/stdout /var/log/v2ray/access.log \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
-    && chmod +x "/tmp/v2ray.sh" \
-    && "/tmp/v2ray.sh" "${V2RAY_CORE_URL}" \
-    && mv /tmp/v2ray/v2ray /usr/local/bin/
+    && wget -O /tmp/v2ray.zip "${V2RAY_CORE_URL}" \
+    && unzip /tmp/v2ray.zip -d /tmp/v2ray \
+    && chmod +x /tmp/v2ray/v2ray \
+    && mv /tmp/v2ray/v2ray /usr/local/bin/ \
+    && mv /tmp/v2ray/geosite.dat /tmp/v2ray/geoip.dat /usr/local/share/v2ray/ \
+    && mv /tmp/v2rayconfig.json /etc/v2ray/config.json \
+    && rm -rf /tmp/v2ray /tmp/v2ray.zip
 # Remove all folder
 RUN rm -rf /tmp
 # [End] V2ray-----------------------------------------------------
