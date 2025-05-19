@@ -21,8 +21,8 @@ RUN set -ex \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && wget -O /tmp/v2ray.zip "${V2RAY_CORE_URL}" \
     && unzip /tmp/v2ray.zip -d /tmp/v2ray \
-    && chmod +x /tmp/v2ray/v2ray \
-    && mv /tmp/v2ray/v2ray /usr/local/bin/ \
+    && mv /tmp/v2ray/v2ray* /usr/local/bin/v2ray \
+    && chmod +x /usr/local/bin/v2ray \
     && mv /tmp/v2ray/geosite.dat /tmp/v2ray/geoip.dat /usr/local/share/v2ray/ \
     && mv /tmp/v2rayconfig.json /etc/v2ray/config.json \
     && rm -rf /tmp/v2ray /tmp/v2ray.zip
