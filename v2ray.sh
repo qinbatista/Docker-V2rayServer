@@ -1,69 +1,26 @@
 #!/bin/sh
 
-# Set ARG
-PLATFORM=$1
-TAG=$2
-V2RAY_DOWNLOADURL = $3
+V2RAY_CORE_URL=$1
 
-if [ -z "$PLATFORM" ]; then
-    ARCH="64"
-else
-    case "$PLATFORM" in
-        linux/386)
-            ARCH="32"
-            ;;
-        linux/amd64)
-            ARCH="64"
-            ;;
-        linux/arm/v6)
-            ARCH="arm32-v6"
-            ;;
-        linux/arm/v7)
-            ARCH="arm32-v7a"
-            ;;
-        linux/arm64|linux/arm64/v8)
-            ARCH="arm64-v8a"
-            ;;
-        *)
-            ARCH=""
-            ;;
-    esac
+if [ -z "$V2RAY_CORE_URL" ]; then
+    echo "Error: V2RAY_CORE_URL is not set" && exit 1
 fi
-[ -z "${ARCH}" ] && echo "Error: Not supported OS Architecture" && exit 1
 
-# Download files
-V2RAY_FILE="v2ray-linux-${ARCH}.zip"
-DGST_FILE="v2ray-linux-${ARCH}.zip.dgst"
-echo "Downloading binary file: ${V2RAY_FILE}"
-echo "Downloading binary file: ${DGST_FILE}"
-
-wget -O ${PWD}/v2ray.zip ${V2RAY_DOWNLOADURL}/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
-wget -O ${PWD}/v2ray.zip.dgst ${V2RAY_DOWNLOADURL}/${TAG}/${DGST_FILE} > /dev/null 2>&1
+# Download V2Ray core zip
+wget -O /tmp/v2ray.zip "$V2RAY_CORE_URL"
 
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
-fi
-echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
-
-# Check SHA512
-V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
-V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
-
-if [ "${V2RAY_ZIP_HASH}" = "${V2RAY_ZIP_DGST_HASH}" ]; then
-    echo " Check passed" && rm -fv v2ray.zip.dgst
-else
-    echo "V2RAY_ZIP_HASH: ${V2RAY_ZIP_HASH}"
-    echo "V2RAY_ZIP_DGST_HASH: ${V2RAY_ZIP_DGST_HASH}"
-    echo " Check have not passed yet " && exit 1
+    echo "Error: Failed to download V2Ray core" && exit 1
 fi
 
-# Prepare
-echo "Prepare to use"
-unzip v2ray.zip && chmod +x v2ray
-mv v2ray /usr/bin/
-mv geosite.dat geoip.dat /usr/local/share/v2ray/
+# Extract and install
+unzip /tmp/v2ray.zip -d /tmp/v2ray
+chmod +x /tmp/v2ray/v2ray
+mv /tmp/v2ray/v2ray /usr/bin/
+mv /tmp/v2ray/geosite.dat /tmp/v2ray/geoip.dat /usr/local/share/v2ray/
 mv /tmp/v2rayconfig.json /etc/v2ray/config.json
 
-# Clean
-rm -rf ${PWD}/*
+# Clean up
+rm -rf /tmp/v2ray /tmp/v2ray.zip
+
 echo "Done"
