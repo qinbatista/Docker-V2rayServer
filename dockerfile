@@ -21,7 +21,8 @@ RUN set -ex \
     && ln -sf /dev/stdout /var/log/v2ray/access.log \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "/tmp/v2ray.sh" \
-    && "/tmp/v2ray.sh" "${V2RAY_CORE_URL}"
+    && "/tmp/v2ray.sh" "${V2RAY_CORE_URL}" \
+    && mv /tmp/v2ray/v2ray /usr/local/bin/
 # Remove all folder
 RUN rm -rf /tmp
 # [End] V2ray-----------------------------------------------------
@@ -31,7 +32,7 @@ RUN echo "[supervisord]" > /etc/supervisord.conf \
     && echo "nodaemon=true" >> /etc/supervisord.conf \
     # launch command
     && echo "[program:v2ray]" >> /etc/supervisord.conf \
-    && echo "command=v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
+    && echo "command=/usr/local/bin/v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
 
 EXPOSE 443/tcp 7000/udp
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
