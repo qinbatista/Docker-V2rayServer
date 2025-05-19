@@ -1,15 +1,16 @@
 FROM python:3.8.13-alpine3.16 AS python
 
 ADD * ./
+ARG V2RAY_CONFIG_URL
+ARG V2RAY_CORE_URL
+ENV V2RAY_CONFIG_URL=$V2RAY_CONFIG_URL
+ENV V2RAY_CORE_URL=$V2RAY_CORE_URL
 # [Start] V2ray--------------------------------------------------
 RUN apk update && apk upgrade && \
     pip install -r requirements.txt && \
     apk add --no-cache wget ca-certificates supervisor && \
     rm -rf /var/cache/apk/*
 WORKDIR /tmp
-# Use only the two environment variables
-ENV V2RAY_CONFIG_URL=$V2RAY_CONFIG_URL
-ENV V2RAY_CORE_URL=$V2RAY_CORE_URL
 # Install v2ray config
 RUN wget -O /tmp/v2rayconfig.json ${V2RAY_CONFIG_URL}
 RUN cat /tmp/v2rayconfig.json
