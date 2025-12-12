@@ -61,5 +61,5 @@ RUN echo "[supervisord]" > /etc/supervisord.conf \
     && echo "[program:v2ray]" >> /etc/supervisord.conf \
     && echo "command=/usr/local/bin/v2ray run -c /etc/v2ray/config.json" >> /etc/supervisord.conf
 
-EXPOSE 7000/udp 7001/udp 7002/tcp
+EXPOSE 7000/tcp 7001/udp 7002/udp
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
