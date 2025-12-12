@@ -38,4 +38,26 @@ jobs:
           tags: qinbatista/v2rayserver:latest
           build-args: |
             V2RAY_CONFIG_URL=${{ vars.V2RAY_CONFIG_URL }}
-            V2RAY_CORE_URL=${{ vars.V2RAY_CORE_URL }}
+            V2RAY_CORE_URL_86=${{ vars.V2RAY_CORE_URL_86 }}
+            V2RAY_CORE_URL_ARM=${{ vars.V2RAY_CORE_URL_ARM }}
+
+  smoke-test:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker/setup-qemu-action@v3
+
+      - uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Validate amd64 image boots
+        run: |
+          docker pull --platform linux/amd64 qinbatista/v2rayserver:latest
+          docker run --rm --platform linux/amd64 qinbatista/v2rayserver:latest v2ray --version
+
+      - name: Validate arm64 image boots
+        run: |
+          docker pull --platform linux/arm64 qinbatista/v2rayserver:latest
+          docker run --rm --platform linux/arm64 qinbatista/v2rayserver:latest v2ray --version
