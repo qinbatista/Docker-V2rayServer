@@ -32,7 +32,7 @@ RUN set -ex \
     && mv /tmp/v2rayconfig.json /etc/v2ray/config.json \
     && rm -rf /tmp/v2ray_amd64 /tmp/v2ray_amd64.zip /tmp/v2ray_arm64 /tmp/v2ray_arm64.zip
 # Architecture-aware launcher
-RUN cat <<'EOF' > /usr/local/bin/v2ray \
+RUN cat <<'EOF' > /usr/local/bin/v2ray
 #!/bin/sh
 set -e
 ARCH="$(uname -m)"
@@ -48,8 +48,8 @@ case "$ARCH" in
         exit 1
         ;;
 esac
-EOF \
-    && chmod +x /usr/local/bin/v2ray
+EOF
+RUN chmod +x /usr/local/bin/v2ray
 # Remove all folder
 RUN rm -rf /tmp
 # [End] V2ray----------------------------------------------------
